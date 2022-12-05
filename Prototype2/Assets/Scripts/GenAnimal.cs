@@ -4,30 +4,23 @@ using UnityEngine;
 
 public class GenAnimal : MonoBehaviour
 {
-    public GameObject _animal1;
-    public GameObject _animal2;
-    public GameObject _animal3;
+    public GameObject[] _animal;
     private int _index = 0;
-    private float _x = 0.0f;
+    private float _xMin = -15.0f;
+    private float _xMax = 15.0f;
     private Vector3 _position;
     private float _timer;
+    private float _timerLimit = 1.0f;
     
     // Update is called once per frame
     void Update()
     {
         _timer += Time.deltaTime;
         _index = (int)Random.Range(0,3);
-        _x = Random.Range(-15.0f, 15.0f);
-        _position = new Vector3(_x, transform.position.y, transform.position.z);
+        _position = new Vector3(Random.Range(_xMin, _xMax), transform.position.y, transform.position.z);
 
-        if (_timer > 1.0f) {
-            if (_index == 0) {
-                Instantiate(_animal1, _position, _animal1.transform.rotation);
-            } else if (_index == 1) {
-                Instantiate(_animal2, _position, _animal2.transform.rotation);
-            } else {
-                Instantiate(_animal3, _position, _animal3.transform.rotation);
-            }
+        if (_timer > _timerLimit) {
+            Instantiate(_animal[_index], _position, _animal[_index].transform.rotation);
             _timer = 0.0f;
         }
     }
