@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject _food;
     private float _horizontalInput;
     private float _verticalInput;
-    private float _speed = 10f;
+    private float _speed = 20f;
     private float _xBoundary = 15f;
     private float _zTopBoundary = 10f;
     private float _zBottomBoundary = 0f;
@@ -33,8 +33,10 @@ public class PlayerMove : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, _zBottomBoundary);
         }
 
-        if(Input.GetKeyDown(KeyCode.F)){
-            Instantiate(_food, transform.position, _food.transform.rotation);
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Instantiate(_food, 
+                new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.5f),
+                _food.transform.rotation);
         }
     }
 }

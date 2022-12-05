@@ -9,19 +9,18 @@ public class GenAnimal : MonoBehaviour
     private float _xMin = -15.0f;
     private float _xMax = 15.0f;
     private Vector3 _position;
-    private float _timer;
-    private float _timerLimit = 1.0f;
+    private float _startDelay = 2;
+    private float _spawnInterval = 1.5f;
     
-    // Update is called once per frame
-    void Update()
+    private void Start() 
     {
-        _timer += Time.deltaTime;
+       InvokeRepeating("SpawnRandomAnimal", _startDelay, _spawnInterval); 
+        
+    }
+    void SpawnRandomAnimal()
+    {
         _index = (int)Random.Range(0,3);
         _position = new Vector3(Random.Range(_xMin, _xMax), transform.position.y, transform.position.z);
-
-        if (_timer > _timerLimit) {
-            Instantiate(_animal[_index], _position, _animal[_index].transform.rotation);
-            _timer = 0.0f;
-        }
+        Instantiate(_animal[_index], _position, _animal[_index].transform.rotation);
     }
 }
