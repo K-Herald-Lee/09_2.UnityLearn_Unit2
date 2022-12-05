@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameObject _food;
     private float _horizontalInput;
     private float _verticalInput;
     private float _speed = 10f;
@@ -30,6 +31,10 @@ public class PlayerMove : MonoBehaviour
         }
         if (transform.position.z < _zBottomBoundary) {
             transform.position = new Vector3(transform.position.x, transform.position.y, _zBottomBoundary);
+        }
+
+        if(Input.GetKeyDown(KeyCode.F)){
+            Instantiate(_food, transform.position, _food.transform.rotation);
         }
     }
 }
